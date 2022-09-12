@@ -1,0 +1,15 @@
+.idea
+.github
+src
+test
+.git
+cypress.json
+tsconfig.json
+tsconfig.node.json
+vite.config.ts
+yarn.lock
+.prettierignore
+.prettierrc
+cypress
+lib
+scripts

@@ -1,0 +1,56 @@
+{
+    "name": "react-ctx-toolkit",
+    "private": false,
+    "version": "0.0.1",
+    "description": "Helper functions for React Context API inspired by @reduxjs/toolkit",
+    "repository": "https://github.com/sadeqi-ah/react-ctx-toolkit",
+    "author": "AmirHossein Sadeqi",
+    "license": "MIT",
+    "scripts": {
+        "dev": "tsc && vite build --watch",
+        "build": "tsc && vite build",
+        "test": "export TS_JEST_DISABLE_VER_CHECKER=true && jest",
+        "format": "prettier --write \"**/*.{js,ts,tsx,json}\"",
+        "lint": "eslint ./lib/**/*.{ts,tsx}"
+    },
+    "devDependencies": {
+        "@testing-library/jest-dom": "^5.16.5",
+        "@testing-library/react": "^13.4.0",
+        "@types/jest": "^29.0.0",
+        "@types/react": "^18.0.17",
+        "@types/react-dom": "^18.0.6",
+        "@typescript-eslint/eslint-plugin": "^5.37.0",
+        "@typescript-eslint/parser": "^5.37.0",
+        "@vitejs/plugin-react": "^2.1.0",
+        "eslint": "^8.23.1",
+        "eslint-plugin-react": "^7.31.8",
+        "jest": "^29.0.2",
+        "jest-environment-jsdom": "^29.0.2",
+        "prettier": "^2.7.1",
+        "react": "^18.2.0",
+        "react-dom": "^18.2.0",
+        "ts-jest": "^28.0.8",
+        "typescript": "^4.6.4",
+        "vite": "^3.1.0",
+        "vite-plugin-dts": "^1.4.1"
+    },
+    "peerDependencies": {
+        "react": "^18.x",
+        "react-dom": "^18.x"
+    },
+    "files": [
+        "dist"
+    ],
+    "main": "./dist/index.umd.cjs",
+    "module": "./dist/index.js",
+    "types": "./dist/index.d.ts",
+    "exports": {
+        ".": {
+            "import": "./dist/index.js",
+            "require": "./dist/index.umd.cjs"
+        }
+    },
+    "dependencies": {
+        "immer": "^9.0.15"
+    }
+}
