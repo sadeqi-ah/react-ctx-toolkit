@@ -4,12 +4,27 @@
 
 ## Table of Content
 
--   [Usage](#usage)
--   [createAction](#createaction)
--   [createReducer](#createreducer)
--   [createContext](#createcontext)
+- [Installation](#installation)
+- [Getting Started](#getting-started)
+- [createAction](#createaction)
+- [createReducer](#createreducer)
+- [createContext](#createcontext)
 
-## Usage
+## Installation
+
+With yarn
+
+```bash
+yarn add react-hot-toast
+```
+
+With NPM
+
+```bash
+npm install react-hot-toast
+```
+
+## Getting Started
 
 ```typescript
 const increment = createAction<number | undefined>("INCREMENT")
@@ -55,7 +70,7 @@ function App() {
     return (
         <>
             <button onClick={handleIncrement}>Increment</button>
-                count: {count}
+            count: {count}
             <button onClick={handleDecrement}>Decrement</button>
         </>
     )
