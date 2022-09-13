@@ -15,13 +15,13 @@
 With yarn
 
 ```bash
-yarn add react-hot-toast
+yarn add react-ctx-toolkit
 ```
 
 With NPM
 
 ```bash
-npm install react-hot-toast
+npm install react-ctx-toolkit
 ```
 
 ## Getting Started
