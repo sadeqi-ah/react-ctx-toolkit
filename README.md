@@ -53,9 +53,11 @@ function App() {
     }
 
     return (
-        <button onClick={handleIncrement}>Increment</button>
-            count: {count}
-        <button onClick={handleDecrement}>Decrement</button>
+        <>
+            <button onClick={handleIncrement}>Increment</button>
+                count: {count}
+            <button onClick={handleDecrement}>Decrement</button>
+        </>
     )
 }
 
