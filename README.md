@@ -72,7 +72,7 @@ function Root() {
 
 ## createAction
 
-A helper function for defining a action.
+A helper function for defining an action.
 
 ```typescript
 const increment = createAction<number | undefined>("INCREMENT")
@@ -126,7 +126,7 @@ const reducer = createReducer<StateType>((builder) => {
 
 ## createContext
 
-It is a helper function to creating context, provider and hooks.
+It is a helper function for creating context, provider, and hooks.
 
 ```typescript
 const {
