@@ -2,6 +2,7 @@
 .github
 src
 test
+__test__
 .git
 cypress.json
 tsconfig.json
@@ -10,6 +11,11 @@ vite.config.ts
 yarn.lock
 .prettierignore
 .prettierrc
+.eslintrc.json
 cypress
 lib
 scripts
+jest.config.json
+README.md
+*.log
+logs
