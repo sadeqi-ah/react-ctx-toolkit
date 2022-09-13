@@ -2,11 +2,71 @@
 
 `react-ctx-toolkit` is a simple, compact, uncomplicated package inspired by `@reduxjs/toolkit` that includes helper functions for better coding with Context API
 
-## List of functions
+## Table of Content
 
+-   [Usage](#usage)
 -   [createAction](#createaction)
 -   [createReducer](#createreducer)
 -   [createContext](#createcontext)
+
+## Usage
+
+```typescript
+const increment = createAction<number | undefined>("INCREMENT")
+const decrement = createAction<number | undefined>("DECREMENT")
+
+type CounterState = {
+    count: number
+}
+
+const initialState: CounterState = {
+    count: 0,
+}
+
+const reducer = createReducer<CounterState>((builder) => {
+    builder
+        .addCase(increment, (state, action) => {
+            state.count += action.payload || 1
+            return state
+        })
+        .addCase(decrement, (state, action) => {
+            state.count -= action.payload || 1
+            return state
+        })
+})
+
+const {
+    Provider: CounterProvider,
+    hooks: [useCounter, useCounterDispatch],
+} = createContext({ displayName: "Counter", initialState }, reducer)
+
+function App() {
+    const { count } = useCounter()
+    const dispatch = useCounterDispatch()
+
+    const handleIncrement = () => {
+        dispatch(increment(5))
+    }
+
+    const handleDecrement = () => {
+        dispatch(decrement(5))
+    }
+
+    return (
+        <button onClick={handleIncrement}>Increment</button>
+            count: {count}
+        <button onClick={handleDecrement}>Decrement</button>
+    )
+}
+
+function Root() {
+    return (
+        <CounterProvider>
+            <App />
+        </CounterProvider>
+    )
+}
+```
 
 ## createAction
 
@@ -43,7 +103,7 @@ A helper function for creating a reducer.
 
 ```typescript
 const increment = createAction<number | undefined>("INCREMENT")
-const decrease = createAction<number | undefined>("DECREASE")
+const decrement = createAction<number | undefined>("DECREMENT")
 
 type StateType = {
     count: number
@@ -55,7 +115,7 @@ const reducer = createReducer<StateType>((builder) => {
             state.count += action.payload || 1
             return state
         })
-        .addCase(decrease, (state, action) => {
+        .addCase(decrement, (state, action) => {
             state.count -= action.payload || 1
             return state
         })
