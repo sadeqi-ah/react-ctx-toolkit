@@ -1,11 +1,21 @@
 {
     "name": "react-ctx-toolkit",
+    "type": "module",
     "private": false,
     "version": "0.0.1",
     "description": "Helper functions for React Context API inspired by @reduxjs/toolkit",
     "repository": "https://github.com/sadeqi-ah/react-ctx-toolkit",
     "author": "AmirHossein Sadeqi",
     "license": "MIT",
+    "keyword": [
+        "react",
+        "context",
+        "toolkit"
+    ],
+    "homePage": "https://github.com/sadeqi-ah/react-ctx-toolkit#readme",
+    "bugs": {
+        "url": "https://github.com/sadeqi-ah/react-ctx-toolkit/issues"
+    },
     "scripts": {
         "dev": "tsc && vite build --watch",
         "build": "tsc && vite build",
@@ -43,7 +53,6 @@
     ],
     "main": "./dist/index.umd.cjs",
     "module": "./dist/index.js",
-    "types": "./dist/index.d.ts",
     "exports": {
         ".": {
             "import": "./dist/index.js",
