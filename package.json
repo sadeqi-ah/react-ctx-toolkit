@@ -2,7 +2,7 @@
     "name": "react-ctx-toolkit",
     "type": "module",
     "private": false,
-    "version": "0.0.1",
+    "version": "0.0.2",
     "description": "Helper functions for React Context API inspired by @reduxjs/toolkit",
     "repository": "https://github.com/sadeqi-ah/react-ctx-toolkit",
     "author": "AmirHossein Sadeqi",
@@ -45,8 +45,8 @@
         "vite-plugin-dts": "^1.4.1"
     },
     "peerDependencies": {
-        "react": "^18.x",
-        "react-dom": "^18.x"
+        "react": "^17.x",
+        "react-dom": "^17.x"
     },
     "files": [
         "dist"
