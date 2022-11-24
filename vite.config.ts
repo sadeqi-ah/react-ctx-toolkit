@@ -16,6 +16,7 @@ export default () => {
                 entry: path.resolve(__dirname, "lib", "index.ts"),
                 name: "index",
                 fileName: "index",
+                formats: ["es", "cjs"],
             },
             rollupOptions: {
                 external: ["react", "react-dom"],

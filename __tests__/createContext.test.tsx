@@ -2,6 +2,7 @@ import React, { useContext } from "react"
 import { fireEvent, render, screen } from "@testing-library/react"
 import "@testing-library/jest-dom"
 import { createAction, createContext, createReducer } from "../lib"
+import { useSelector } from "../lib/useSelector"
 
 type User = {
     name: string
@@ -45,8 +46,8 @@ const {
 describe("createContext", () => {
     test("test context", () => {
         const App = () => {
-            const app = useContext(AppContext)
-            return <p>show: {`${app?.show}`}</p>
+            const app = useSelector(AppContext)
+            return <p>show: {`${app.show}`}</p>
         }
 
         render(
@@ -59,12 +60,20 @@ describe("createContext", () => {
 
     test("test dispatch context", () => {
         const App = () => {
-            const app = useContext(AppContext)
+            const app = useSelector(AppContext)
             const dispatch = useContext(AppDispatchContext)
             return (
                 <>
-                    <button onClick={() => dispatch && dispatch(pushUser({ name: "bob" }))}>add</button>
-                    <p>name: {`${app?.users[0] && app.users[0].name}`}</p>
+                    <button
+                        onClick={() => {
+                            if (dispatch) {
+                                dispatch(pushUser({ name: "bob" }))
+                            }
+                        }}
+                    >
+                        add
+                    </button>
+                    <p>name: {`${app.users[0] && app.users[0].name}`}</p>
                 </>
             )
         }
@@ -81,7 +90,13 @@ describe("createContext", () => {
     test("test state custom hook", () => {
         const App = () => {
             const app = useApp()
-            return <p>show: {`${app.show}`}</p>
+            const show = useApp((state) => state.show)
+            return (
+                <>
+                    <p>show: {`${app.show}`}</p>
+                    <p>show (selector value): {`${show}`}</p>
+                </>
+            )
         }
 
         render(
@@ -90,16 +105,19 @@ describe("createContext", () => {
             </Provider>
         )
         expect(screen.getByText(/^show:/)).toHaveTextContent("show: false")
+        expect(screen.getByText(/^show \(selector value\):/)).toHaveTextContent("show (selector value): false")
     })
 
     test("test dispatch custom hook", () => {
         const App = () => {
             const app = useApp()
+            const user = useApp((state) => state.users)
             const dispatch = useAppDispatch()
             return (
                 <>
                     <button onClick={() => dispatch(pushUser({ name: "bob" }))}>add</button>
                     <p>name: {`${app.users[0] && app.users[0].name}`}</p>
+                    <p>name (selector value): {`${user[0] && user[0].name}`}</p>
                 </>
             )
         }
@@ -111,5 +129,6 @@ describe("createContext", () => {
         )
         fireEvent.click(screen.getByText("add"))
         expect(screen.getByText(/^name:/)).toHaveTextContent("name: bob")
+        expect(screen.getByText(/^name \(selector value\):/)).toHaveTextContent("name (selector value): bob")
     })
 })

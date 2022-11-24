@@ -1,37 +1,35 @@
 import { createContext as createContextReact, useContext, useReducer } from "react"
 import { Action } from "./createAction"
+import { ContextValue, createProvider } from "./createProvider"
+import { Reducer } from "./createReducer"
+import { Selector, useSelector } from "./useSelector"
 
 export type CreateContextOptions<S> = {
     displayName: string
     initialState: S
 }
 
-export function createContext<S>(
-    { displayName, initialState }: CreateContextOptions<S>,
-    reducer: (state: S, action: Action<any>) => S
-) {
-    const Context = createContextReact<S | undefined>(undefined)
+export function createContext<S>({ displayName, initialState }: CreateContextOptions<S>, reducer: Reducer<S, any>) {
+    const Context = createContextReact<ContextValue<S> | undefined>(undefined)
     const DispatchContext = createContextReact<React.Dispatch<Action<any>> | undefined>(undefined)
 
     Context.displayName = `${displayName}.Context`
     DispatchContext.displayName = `${displayName}.DispatchContext`
 
+    const ContextProvider = createProvider(Context.Provider)
+
     function Provider({ children }: { children: React.ReactNode }) {
         const [state, dispatch] = useReducer(reducer, initialState)
         return (
             <DispatchContext.Provider value={dispatch}>
-                <Context.Provider value={state}>{children}</Context.Provider>
+                <ContextProvider value={state}>{children}</ContextProvider>
             </DispatchContext.Provider>
         )
     }
     Provider.prototype.displayName = `${displayName}.Provider`
 
-    const useState = () => {
-        const state = useContext(Context)
-        if (state === undefined) {
-            throw new Error(`[${displayName}] must be used within a Provider`)
-        }
-        return state
+    function useState<V = S>(selector?: Selector<S, V>) {
+        return useSelector(Context, selector)
     }
 
     const useDispatch = () => {

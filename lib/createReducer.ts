@@ -29,6 +29,9 @@ export interface ActionReducerMapBuilder<State> {
     addDefaultCase(reducer: CaseReducer<State, AnyAction>): void
 }
 
+
+export type Reducer<S, A> = (state: S, action: Action<A>) => S
+
 export function createReducer<S>(casesBuilder: (builder: ActionReducerMapBuilder<S>) => void) {
     const [actionsMap, defaultCaseReducer] = executeCasesBuilder(casesBuilder)
     return (state: S, action: Action) => {
