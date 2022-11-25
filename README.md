@@ -4,11 +4,12 @@
 
 ## Table of Content
 
-- [Installation](#installation)
-- [Getting Started](#getting-started)
-- [createAction](#createaction)
-- [createReducer](#createreducer)
-- [createContext](#createcontext)
+-   [Installation](#installation)
+-   [Getting Started](#getting-started)
+-   [createAction](#createaction)
+-   [createReducer](#createreducer)
+-   [createContext](#createcontext)
+-   [useSelector](#useselector)
 
 ## Installation
 
@@ -56,7 +57,7 @@ const {
 } = createContext({ displayName: "Counter", initialState }, reducer)
 
 function App() {
-    const { count } = useCounter()
+    const count = useCounter((state) => state.count)
     const dispatch = useCounterDispatch()
 
     const handleIncrement = () => {
@@ -149,4 +150,14 @@ const {
     contexts: [CounterContext, CounterDispatchContext],
     hooks: [useCounter, useCounterDispatch],
 } = createContext({ displayName: "Counter", initialState }, reducer)
+```
+
+## useSelector
+
+In React Context when a context value is changed, all components that use `useContext` will re-render. `useSelector` helps you solve this issue and get better performance.
+
+> If you use hooks exported from `createContext`, you don't need to use `useSelector`. because the hooks use `useSelector` internally.
+
+```typescript
+const theme = useSelector(AppContext, (state) => state.theme)
 ```
